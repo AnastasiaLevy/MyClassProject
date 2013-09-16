@@ -1,0 +1,537 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="Model1.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityContainer Name="Model1StoreContainer">
+          <EntitySet Name="Activities" EntityType="Model1.Store.Activities" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="ClassFiles" EntityType="Model1.Store.ClassFiles" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Grades" EntityType="Model1.Store.Grades" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Labs" EntityType="Model1.Store.Labs" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="People" EntityType="Model1.Store.People" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Person" EntityType="Model1.Store.Person" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Pictures" EntityType="Model1.Store.Pictures" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Schedules" EntityType="Model1.Store.Schedules" store:Type="Tables" Schema="dbo" />
+          <AssociationSet Name="FK_ActivityGrades" Association="Model1.Store.FK_ActivityGrades">
+            <End Role="Activities" EntitySet="Activities" />
+            <End Role="Grades" EntitySet="Grades" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ClassFileActivity" Association="Model1.Store.FK_ClassFileActivity">
+            <End Role="ClassFiles" EntitySet="ClassFiles" />
+            <End Role="Activities" EntitySet="Activities" />
+          </AssociationSet>
+          <AssociationSet Name="FK_GradesPerson" Association="Model1.Store.FK_GradesPerson">
+            <End Role="People" EntitySet="People" />
+            <End Role="Grades" EntitySet="Grades" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LabPerson" Association="Model1.Store.FK_LabPerson">
+            <End Role="Labs" EntitySet="Labs" />
+            <End Role="People" EntitySet="People" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PicturePerson" Association="Model1.Store.FK_PicturePerson">
+            <End Role="People" EntitySet="People" />
+            <End Role="Pictures" EntitySet="Pictures" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ScheduleActivity" Association="Model1.Store.FK_ScheduleActivity">
+            <End Role="Schedules" EntitySet="Schedules" />
+            <End Role="Activities" EntitySet="Activities" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ScheduleLab" Association="Model1.Store.FK_ScheduleLab">
+            <End Role="Schedules" EntitySet="Schedules" />
+            <End Role="Labs" EntitySet="Labs" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Activities">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="nvarchar(max)" />
+          <Property Name="ScheduleId" Type="int" Nullable="false" />
+          <Property Name="ClassFileId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ClassFiles">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="File" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Grades">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Value" Type="int" />
+          <Property Name="PersonId" Type="int" Nullable="false" />
+          <Property Name="ActivityId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Labs">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="PersonID" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="ClassID" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="ScheduleId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="People">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="FirstName" Type="nvarchar(max)" />
+          <Property Name="LastName" Type="nvarchar(max)" />
+          <Property Name="Username" Type="nvarchar(max)" />
+          <Property Name="Password" Type="nvarchar(max)" />
+          <Property Name="PictureID" Type="int" Nullable="false" />
+          <Property Name="LabId" Type="int" Nullable="false" />
+          <Property Name="ClassID" Type="int" />
+        </EntityType>
+        <EntityType Name="Person">
+          <Key>
+            <PropertyRef Name="PersonID" />
+          </Key>
+          <Property Name="PersonID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="PictureID" Type="int" Nullable="false" />
+          <Property Name="LabID" Type="int" Nullable="false" />
+          <Property Name="StudyGroupId" Type="int" Nullable="false" />
+          <Property Name="FirstName" Type="nchar" MaxLength="10" />
+          <Property Name="LastName" Type="nchar" MaxLength="10" />
+          <Property Name="UserName" Type="nchar" MaxLength="10" />
+          <Property Name="Password" Type="nchar" MaxLength="10" />
+          <Property Name="ClassId" Type="int" />
+        </EntityType>
+        <EntityType Name="Pictures">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="PictureFile" Type="nvarchar(max)" />
+          <Property Name="PersonId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Schedules">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="DayoftheWeek" Type="nvarchar(max)" />
+          <Property Name="Time" Type="nvarchar(max)" />
+        </EntityType>
+        <Association Name="FK_ActivityGrades">
+          <End Role="Activities" Type="Model1.Store.Activities" Multiplicity="1" />
+          <End Role="Grades" Type="Model1.Store.Grades" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Activities">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Grades">
+              <PropertyRef Name="ActivityId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ClassFileActivity">
+          <End Role="ClassFiles" Type="Model1.Store.ClassFiles" Multiplicity="1" />
+          <End Role="Activities" Type="Model1.Store.Activities" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ClassFiles">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Activities">
+              <PropertyRef Name="ClassFileId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_GradesPerson">
+          <End Role="People" Type="Model1.Store.People" Multiplicity="1" />
+          <End Role="Grades" Type="Model1.Store.Grades" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="People">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Grades">
+              <PropertyRef Name="PersonId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LabPerson">
+          <End Role="Labs" Type="Model1.Store.Labs" Multiplicity="1" />
+          <End Role="People" Type="Model1.Store.People" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Labs">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="People">
+              <PropertyRef Name="LabId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PicturePerson">
+          <End Role="People" Type="Model1.Store.People" Multiplicity="1" />
+          <End Role="Pictures" Type="Model1.Store.Pictures" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="People">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Pictures">
+              <PropertyRef Name="PersonId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ScheduleActivity">
+          <End Role="Schedules" Type="Model1.Store.Schedules" Multiplicity="1" />
+          <End Role="Activities" Type="Model1.Store.Activities" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Schedules">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Activities">
+              <PropertyRef Name="ScheduleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ScheduleLab">
+          <End Role="Schedules" Type="Model1.Store.Schedules" Multiplicity="1" />
+          <End Role="Labs" Type="Model1.Store.Labs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Schedules">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Labs">
+              <PropertyRef Name="ScheduleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="Model1" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" annotation:UseStrongSpatialTypes="false">
+        <EntityContainer Name="Model1Container" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="People" EntityType="Model1.Person" />
+          <EntitySet Name="Pictures" EntityType="Model1.Picture" />
+          <AssociationSet Name="PicturePerson" Association="Model1.PicturePerson">
+            <End Role="Picture" EntitySet="Pictures" />
+            <End Role="Person" EntitySet="People" />
+          </AssociationSet>
+          <EntitySet Name="Labs" EntityType="Model1.Lab" />
+          <AssociationSet Name="LabPerson" Association="Model1.LabPerson">
+            <End Role="Lab" EntitySet="Labs" />
+            <End Role="Person" EntitySet="People" />
+          </AssociationSet>
+          <EntitySet Name="Grades" EntityType="Model1.Grades" />
+          <AssociationSet Name="GradesPerson" Association="Model1.GradesPerson">
+            <End Role="Grades" EntitySet="Grades" />
+            <End Role="Person" EntitySet="People" />
+          </AssociationSet>
+          <EntitySet Name="Activities" EntityType="Model1.Activity" />
+          <AssociationSet Name="ActivityGrades" Association="Model1.ActivityGrades">
+            <End Role="Activity" EntitySet="Activities" />
+            <End Role="Grades" EntitySet="Grades" />
+          </AssociationSet>
+          <EntitySet Name="Schedules" EntityType="Model1.Schedule" />
+          <AssociationSet Name="ScheduleActivity" Association="Model1.ScheduleActivity">
+            <End Role="Schedule" EntitySet="Schedules" />
+            <End Role="Activity" EntitySet="Activities" />
+          </AssociationSet>
+          <AssociationSet Name="ScheduleLab" Association="Model1.ScheduleLab">
+            <End Role="Schedule" EntitySet="Schedules" />
+            <End Role="Lab" EntitySet="Labs" />
+          </AssociationSet>
+          <EntitySet Name="ClassFiles" EntityType="Model1.ClassFile" />
+          <AssociationSet Name="ClassFileActivity" Association="Model1.ClassFileActivity">
+            <End Role="ClassFile" EntitySet="ClassFiles" />
+            <End Role="Activity" EntitySet="Activities" />
+          </AssociationSet>
+          <EntitySet Name="People1" EntityType="Model1.Person1" />
+        </EntityContainer>
+        <EntityType Name="Person">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="FirstName" Nullable="true" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Type="String" Name="LastName" Nullable="true" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Type="String" Name="Username" Nullable="true" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Type="String" Name="Password" Nullable="true" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="Pictures" Relationship="Model1.PicturePerson" FromRole="Person" ToRole="Picture" />
+          <Property Type="Int32" Name="PictureID" Nullable="false" />
+          <NavigationProperty Name="Lab" Relationship="Model1.LabPerson" FromRole="Person" ToRole="Lab" />
+          <Property Type="Int32" Name="LabId" Nullable="false" />
+          <NavigationProperty Name="Grades" Relationship="Model1.GradesPerson" FromRole="Person" ToRole="Grades" />
+          <Property Type="Int32" Name="ClassID" Nullable="true" />
+        </EntityType>
+        <EntityType Name="Picture">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="PictureFile" Nullable="true" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="Person" Relationship="Model1.PicturePerson" FromRole="Picture" ToRole="Person" />
+          <Property Type="Int32" Name="PersonId" Nullable="false" />
+        </EntityType>
+        <Association Name="PicturePerson">
+          <End Type="Model1.Picture" Role="Picture" Multiplicity="*" />
+          <End Type="Model1.Person" Role="Person" Multiplicity="1" />
+          <ReferentialConstraint>
+            <Principal Role="Person">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Picture">
+              <PropertyRef Name="PersonId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Lab">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="People" Relationship="Model1.LabPerson" FromRole="Lab" ToRole="Person" />
+          <Property Type="String" Name="PersonID" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Type="String" Name="ClassID" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="Schedule" Relationship="Model1.ScheduleLab" FromRole="Lab" ToRole="Schedule" />
+          <Property Type="Int32" Name="ScheduleId" Nullable="false" />
+        </EntityType>
+        <Association Name="LabPerson">
+          <End Type="Model1.Lab" Role="Lab" Multiplicity="1" />
+          <End Type="Model1.Person" Role="Person" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Lab">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Person">
+              <PropertyRef Name="LabId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Grades">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="Value" Nullable="true" ConcurrencyMode="None" />
+          <NavigationProperty Name="Person" Relationship="Model1.GradesPerson" FromRole="Grades" ToRole="Person" />
+          <Property Type="Int32" Name="PersonId" Nullable="false" />
+          <NavigationProperty Name="Activity" Relationship="Model1.ActivityGrades" FromRole="Grades" ToRole="Activity" />
+          <Property Type="Int32" Name="ActivityId" Nullable="false" />
+        </EntityType>
+        <Association Name="GradesPerson">
+          <End Type="Model1.Grades" Role="Grades" Multiplicity="*" />
+          <End Type="Model1.Person" Role="Person" Multiplicity="1" />
+          <ReferentialConstraint>
+            <Principal Role="Person">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Grades">
+              <PropertyRef Name="PersonId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Activity">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="Name" Nullable="true" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="Grades" Relationship="Model1.ActivityGrades" FromRole="Activity" ToRole="Grades" />
+          <NavigationProperty Name="Schedule" Relationship="Model1.ScheduleActivity" FromRole="Activity" ToRole="Schedule" />
+          <Property Type="Int32" Name="ScheduleId" Nullable="false" />
+          <NavigationProperty Name="ClassFile" Relationship="Model1.ClassFileActivity" FromRole="Activity" ToRole="ClassFile" />
+          <Property Type="Int32" Name="ClassFileId" Nullable="false" />
+        </EntityType>
+        <Association Name="ActivityGrades">
+          <End Type="Model1.Activity" Role="Activity" Multiplicity="1" />
+          <End Type="Model1.Grades" Role="Grades" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Activity">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Grades">
+              <PropertyRef Name="ActivityId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Schedule">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="DayoftheWeek" Nullable="true" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Type="String" Name="Time" Nullable="true" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="Activities" Relationship="Model1.ScheduleActivity" FromRole="Schedule" ToRole="Activity" />
+          <NavigationProperty Name="Labs" Relationship="Model1.ScheduleLab" FromRole="Schedule" ToRole="Lab" />
+        </EntityType>
+        <Association Name="ScheduleActivity">
+          <End Type="Model1.Schedule" Role="Schedule" Multiplicity="1" />
+          <End Type="Model1.Activity" Role="Activity" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Schedule">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Activity">
+              <PropertyRef Name="ScheduleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ScheduleLab">
+          <End Type="Model1.Schedule" Role="Schedule" Multiplicity="1" />
+          <End Type="Model1.Lab" Role="Lab" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Schedule">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Lab">
+              <PropertyRef Name="ScheduleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="ClassFile">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="File" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="Activities" Relationship="Model1.ClassFileActivity" FromRole="ClassFile" ToRole="Activity" />
+        </EntityType>
+        <Association Name="ClassFileActivity">
+          <End Type="Model1.ClassFile" Role="ClassFile" Multiplicity="1" />
+          <End Type="Model1.Activity" Role="Activity" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ClassFile">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Activity">
+              <PropertyRef Name="ClassFileId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Person1">
+          <Key>
+            <PropertyRef Name="PersonID" />
+          </Key>
+          <Property Type="Int32" Name="PersonID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="PictureID" Nullable="false" />
+          <Property Type="Int32" Name="LabID" Nullable="false" />
+          <Property Type="Int32" Name="StudyGroupId" Nullable="false" />
+          <Property Type="String" Name="FirstName" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Type="String" Name="LastName" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Type="String" Name="UserName" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Type="String" Name="Password" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Type="Int32" Name="ClassId" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+    <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="Model1StoreContainer" CdmEntityContainer="Model1Container">
+    <EntitySetMapping Name="People">
+      <EntityTypeMapping TypeName="IsTypeOf(Model1.Person)">
+        <MappingFragment StoreEntitySet="People">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+          <ScalarProperty Name="LastName" ColumnName="LastName" />
+          <ScalarProperty Name="Username" ColumnName="Username" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="PictureID" ColumnName="PictureID" />
+          <ScalarProperty Name="LabId" ColumnName="LabId" />
+          <ScalarProperty Name="ClassID" ColumnName="ClassID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Pictures">
+      <EntityTypeMapping TypeName="IsTypeOf(Model1.Picture)">
+        <MappingFragment StoreEntitySet="Pictures">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="PictureFile" ColumnName="PictureFile" />
+          <ScalarProperty Name="PersonId" ColumnName="PersonId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Labs">
+      <EntityTypeMapping TypeName="IsTypeOf(Model1.Lab)">
+        <MappingFragment StoreEntitySet="Labs">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="PersonID" ColumnName="PersonID" />
+          <ScalarProperty Name="ClassID" ColumnName="ClassID" />
+          <ScalarProperty Name="ScheduleId" ColumnName="ScheduleId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Grades">
+      <EntityTypeMapping TypeName="IsTypeOf(Model1.Grades)">
+        <MappingFragment StoreEntitySet="Grades">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Value" ColumnName="Value" />
+          <ScalarProperty Name="PersonId" ColumnName="PersonId" />
+          <ScalarProperty Name="ActivityId" ColumnName="ActivityId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Activities">
+      <EntityTypeMapping TypeName="IsTypeOf(Model1.Activity)">
+        <MappingFragment StoreEntitySet="Activities">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="ScheduleId" ColumnName="ScheduleId" />
+          <ScalarProperty Name="ClassFileId" ColumnName="ClassFileId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Schedules">
+      <EntityTypeMapping TypeName="IsTypeOf(Model1.Schedule)">
+        <MappingFragment StoreEntitySet="Schedules">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="DayoftheWeek" ColumnName="DayoftheWeek" />
+          <ScalarProperty Name="Time" ColumnName="Time" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ClassFiles">
+      <EntityTypeMapping TypeName="IsTypeOf(Model1.ClassFile)">
+        <MappingFragment StoreEntitySet="ClassFiles">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="File" ColumnName="File" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+          <EntitySetMapping Name="People1">
+            <EntityTypeMapping TypeName="Model1.Person1">
+              <MappingFragment StoreEntitySet="Person">
+                <ScalarProperty Name="ClassId" ColumnName="ClassId" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="StudyGroupId" ColumnName="StudyGroupId" />
+                <ScalarProperty Name="LabID" ColumnName="LabID" />
+                <ScalarProperty Name="PictureID" ColumnName="PictureID" />
+                <ScalarProperty Name="PersonID" ColumnName="PersonID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping></edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <edmx:Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </edmx:Connection>
+    <edmx:Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+      </DesignerInfoPropertySet>
+    </edmx:Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

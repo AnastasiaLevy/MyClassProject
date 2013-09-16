@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="f81bc59358504df3836b53eea3297cde" Name="Diagram1" ZoomLevel="69" >
+        <EntityTypeShape EntityType="Model1.Person" Width="1.5" PointX="2.5" PointY="0.5" />
+        <EntityTypeShape EntityType="Model1.Picture" Width="1.5" PointX="4.375" PointY="3" />
+        <AssociationConnector Association="Model1.PicturePerson" />
+        <EntityTypeShape EntityType="Model1.Lab" Width="1.5" PointX="4.875" PointY="0.625" />
+        <AssociationConnector Association="Model1.LabPerson" />
+        <EntityTypeShape EntityType="Model1.Grades" Width="1.5" PointX="7.375" PointY="1.25" />
+        <AssociationConnector Association="Model1.GradesPerson" />
+        <EntityTypeShape EntityType="Model1.Activity" Width="1.5" PointX="10.125" PointY="1.5" />
+        <AssociationConnector Association="Model1.ActivityGrades" />
+        <EntityTypeShape EntityType="Model1.Schedule" Width="1.5" PointX="12.875" PointY="2.375" />
+        <AssociationConnector Association="Model1.ScheduleActivity" />
+        <AssociationConnector Association="Model1.ScheduleLab" />
+        <EntityTypeShape EntityType="Model1.ClassFile" Width="1.5" PointX="7.375" PointY="4.75" />
+        <AssociationConnector Association="Model1.ClassFileActivity" />
+        <EntityTypeShape EntityType="Model1.Person1" Width="1.5" PointX="8.9632245828226331" PointY="8.07549927014648" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
